@@ -6,34 +6,35 @@ namespace HotelApp
 {
     class Hotel
     {
-        public string name { get; private set; }
-        private string city { get; set; }
-        public List<Room> rooms { get; private set; }
+        public string Name { get; private set; }
+        private string City { get; set; }
+        public List<Room> Rooms { get; private set; }
         private int priceForNumberOfRooms;
-        public static List<Hotel> myHotels { get; private set; }
+        //public static List<Hotel> myHotels { get; private set; }
 
 
         public Hotel(string name, string city, List<Room> rooms)
         {
-            this.name = name;
-            this.city = city;
-            this.rooms = rooms;
-            foreach (var room in rooms)
-            {
-                priceForNumberOfRooms += room.rate.ammount;
-            }
+            this.Name = name;
+            this.City = city;
+            this.Rooms = rooms;  
         }
 
         
         public void GetPriceForNumberOfRooms(int numberOfRooms)
         {
+            for (int i = 0; i < numberOfRooms; i++)
+            {
+                priceForNumberOfRooms += Rooms[i].rate.Ammount;
+            }
             Console.WriteLine($"The price for the number of rooms is {priceForNumberOfRooms}");
+            
         }
 
         public void Print()
         {
-            Console.WriteLine($"Hotel name: {name}, City {city}" );
-            foreach(var room in rooms)
+            Console.WriteLine($"Hotel name: {Name}, City {City}" );
+            foreach(var room in Rooms)
             {
                 room.Print();
             }

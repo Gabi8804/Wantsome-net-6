@@ -33,7 +33,7 @@ namespace PizzaApp
             if (this.type == "Italian")
             {
                 this.cost= cost * (double)1.5;
-            }
+            } else
             this.cost = cost;
         }
 

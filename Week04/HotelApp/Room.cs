@@ -20,7 +20,7 @@ namespace HotelApp
 
         public void GetPriceForDays(int numberOfDays)
         {
-            var price = numberOfDays * rate.ammount;
+            var price = numberOfDays * rate.Ammount;
             Console.WriteLine($"Price for the nr of days is: {price}"); ;
         }
         public void Print()

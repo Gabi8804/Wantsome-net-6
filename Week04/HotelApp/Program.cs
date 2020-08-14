@@ -25,10 +25,13 @@ namespace HotelApp
 
             List<Hotel> hotels = new List<Hotel>();
 
-            AddHotelToList(hotels, hotel);
-            AddHotelToList(hotels, hotel2);
+            hotels.Add(hotel);
+            hotels.Add(hotel2);
+
             GetHotelList(hotels);
 
+            room.GetPriceForDays(3);
+            room3.GetPriceForDays(5);
 
             GetPriceRoomLower(150, hotels);
 
@@ -45,19 +48,14 @@ namespace HotelApp
                 Console.WriteLine("============================");
             }
         }
-        static void AddHotelToList(List<Hotel> hotels, Hotel hotel)
-        {
-            hotels.Add(hotel);
-        }
-
         static void RemoveHotel(List<Hotel> hotels, string name)
         {
             for (int i = 0; i < hotels.Count; i++)
             {
-                if (hotels[i].name == name)
+                if (hotels[i].Name == name)
                 {
                     Console.WriteLine("============================");
-                    Console.WriteLine($"The Hotel {hotels[i].name} was removed from the list");
+                    Console.WriteLine($"The Hotel {hotels[i].Name} was removed from the list");
                     Console.WriteLine("============================");
                     hotels.RemoveAt(i);
                     break;
@@ -66,21 +64,18 @@ namespace HotelApp
         }
         static void GetPriceRoomLower(int price, List<Hotel> hotels)
         {
-            var check = new bool();
             var roomlist = new List<string>();
             for (int i = 0; i < hotels.Count; i++)
             {
-                for (int j = 0; j < hotels[i].rooms.Count; j++)
+                for (int j = 0; j < hotels[i].Rooms.Count; j++)
                 {
-                    if (price > hotels[i].rooms[j].rate.ammount)
+                    if (price > hotels[i].Rooms[j].rate.Ammount)
                     {
-                        roomlist.Add(hotels[i].rooms[j].name);
-                        check = true;
+                        roomlist.Add(hotels[i].Rooms[j].name);
                     }
-                    else check = false;
                 }
             }
-            if (check == false)
+            if (roomlist.Count==0)
             {
                 Console.WriteLine("============================");
                 Console.WriteLine("Room not found lower than this price");
