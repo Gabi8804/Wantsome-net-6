@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="126387c4981043b5ad8d9bbe7d4dfd82" Name="Diagram1">
+        <EntityTypeShape EntityType="SmartStoreDBModel.BrandCategories" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartStoreDBModel.Brands" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartStoreDBModel.Categories" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartStoreDBModel.CategorySpecs" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartStoreDBModel.Prod_CatSpec" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartStoreDBModel.ProductSubCategories" Width="1.5" PointX="7.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartStoreDBModel.Specs" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmartStoreDBModel.SubCategories" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <AssociationConnector Association="SmartStoreDBModel.FK__BrandCate__Brand__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartStoreDBModel.FK__BrandCate__Categ__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartStoreDBModel.FK__CategoryS__Categ__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartStoreDBModel.FK__SubCatego__Categ__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartStoreDBModel.FK__CategoryS__SpecI__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartStoreDBModel.FK__Prod_CatS__Categ__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="SmartStoreDBModel.FK__ProductSu__SubCa__29572725" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SmartStoreDBModel.Products" Width="1.5" PointX="5.25" PointY="5.125" />
+        <AssociationConnector Association="SmartStoreDBModel.FK_Product_BrandCategory" />
+        <AssociationConnector Association="SmartStoreDBModel.FK__Prod_CatS__Produ__534D60F1" />
+        <AssociationConnector Association="SmartStoreDBModel.FK_ProductSubCategory_Product" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,634 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SmartStoreDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BrandCategories">
+          <Key>
+            <PropertyRef Name="BrandCategoryId" />
+          </Key>
+          <Property Name="BrandCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="BrandId" />
+          </Key>
+          <Property Name="BrandId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategorySpecs">
+          <Key>
+            <PropertyRef Name="CategorySpecsId" />
+          </Key>
+          <Property Name="CategorySpecsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="SpecId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prod_CatSpec">
+          <Key>
+            <PropertyRef Name="Prod_CatSpecId" />
+          </Key>
+          <Property Name="Prod_CatSpecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="CategorySpecsId" Type="int" Nullable="false" />
+          <Property Name="SpecValue" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="BrandCategoryId" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProductSubCategories">
+          <Key>
+            <PropertyRef Name="ProductSubCategoryId" />
+          </Key>
+          <Property Name="ProductSubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="SubCategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specs">
+          <Key>
+            <PropertyRef Name="SpecId" />
+          </Key>
+          <Property Name="SpecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubCategories">
+          <Key>
+            <PropertyRef Name="SubCategoryId" />
+          </Key>
+          <Property Name="SubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BrandCate__Brand__30F848ED">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+          <End Role="BrandCategories" Type="Self.BrandCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="BrandId" />
+            </Principal>
+            <Dependent Role="BrandCategories">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BrandCate__Categ__31EC6D26">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="BrandCategories" Type="Self.BrandCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="BrandCategories">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryS__Categ__5070F446">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="CategorySpecs" Type="Self.CategorySpecs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CategorySpecs">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryS__SpecI__4F7CD00D">
+          <End Role="Specs" Type="Self.Specs" Multiplicity="1" />
+          <End Role="CategorySpecs" Type="Self.CategorySpecs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specs">
+              <PropertyRef Name="SpecId" />
+            </Principal>
+            <Dependent Role="CategorySpecs">
+              <PropertyRef Name="SpecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prod_CatS__Categ__5441852A">
+          <End Role="CategorySpecs" Type="Self.CategorySpecs" Multiplicity="1" />
+          <End Role="Prod_CatSpec" Type="Self.Prod_CatSpec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorySpecs">
+              <PropertyRef Name="CategorySpecsId" />
+            </Principal>
+            <Dependent Role="Prod_CatSpec">
+              <PropertyRef Name="CategorySpecsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prod_CatS__Produ__534D60F1">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Prod_CatSpec" Type="Self.Prod_CatSpec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Prod_CatSpec">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductSu__SubCa__29572725">
+          <End Role="SubCategories" Type="Self.SubCategories" Multiplicity="1" />
+          <End Role="ProductSubCategories" Type="Self.ProductSubCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategories">
+              <PropertyRef Name="SubCategoryId" />
+            </Principal>
+            <Dependent Role="ProductSubCategories">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubCatego__Categ__267ABA7A">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="SubCategories" Type="Self.SubCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="SubCategories">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_BrandCategory">
+          <End Role="BrandCategories" Type="Self.BrandCategories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandCategories">
+              <PropertyRef Name="BrandCategoryId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BrandCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSubCategory_Product">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductSubCategories" Type="Self.ProductSubCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ProductSubCategories">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmartStoreDBModelStoreContainer">
+          <EntitySet Name="BrandCategories" EntityType="Self.BrandCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategorySpecs" EntityType="Self.CategorySpecs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prod_CatSpec" EntityType="Self.Prod_CatSpec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSubCategories" EntityType="Self.ProductSubCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specs" EntityType="Self.Specs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategories" EntityType="Self.SubCategories" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BrandCate__Brand__30F848ED" Association="Self.FK__BrandCate__Brand__30F848ED">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="BrandCategories" EntitySet="BrandCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BrandCate__Categ__31EC6D26" Association="Self.FK__BrandCate__Categ__31EC6D26">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="BrandCategories" EntitySet="BrandCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryS__Categ__5070F446" Association="Self.FK__CategoryS__Categ__5070F446">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CategorySpecs" EntitySet="CategorySpecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryS__SpecI__4F7CD00D" Association="Self.FK__CategoryS__SpecI__4F7CD00D">
+            <End Role="Specs" EntitySet="Specs" />
+            <End Role="CategorySpecs" EntitySet="CategorySpecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prod_CatS__Categ__5441852A" Association="Self.FK__Prod_CatS__Categ__5441852A">
+            <End Role="CategorySpecs" EntitySet="CategorySpecs" />
+            <End Role="Prod_CatSpec" EntitySet="Prod_CatSpec" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prod_CatS__Produ__534D60F1" Association="Self.FK__Prod_CatS__Produ__534D60F1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Prod_CatSpec" EntitySet="Prod_CatSpec" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductSu__SubCa__29572725" Association="Self.FK__ProductSu__SubCa__29572725">
+            <End Role="SubCategories" EntitySet="SubCategories" />
+            <End Role="ProductSubCategories" EntitySet="ProductSubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubCatego__Categ__267ABA7A" Association="Self.FK__SubCatego__Categ__267ABA7A">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="SubCategories" EntitySet="SubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_BrandCategory" Association="Self.FK_Product_BrandCategory">
+            <End Role="BrandCategories" EntitySet="BrandCategories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSubCategory_Product" Association="Self.FK_ProductSubCategory_Product">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductSubCategories" EntitySet="ProductSubCategories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmartStoreDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BrandCategories">
+          <Key>
+            <PropertyRef Name="BrandCategoryId" />
+          </Key>
+          <Property Name="BrandCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Brands" Relationship="Self.FK__BrandCate__Brand__30F848ED" FromRole="BrandCategories" ToRole="Brands" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__BrandCate__Categ__31EC6D26" FromRole="BrandCategories" ToRole="Categories" />
+          <NavigationProperty Name="Products" Relationship="SmartStoreDBModel.FK_Product_BrandCategory" FromRole="BrandCategories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="BrandId" />
+          </Key>
+          <Property Name="BrandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BrandCategories" Relationship="Self.FK__BrandCate__Brand__30F848ED" FromRole="Brands" ToRole="BrandCategories" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BrandCategories" Relationship="Self.FK__BrandCate__Categ__31EC6D26" FromRole="Categories" ToRole="BrandCategories" />
+          <NavigationProperty Name="CategorySpecs" Relationship="Self.FK__CategoryS__Categ__5070F446" FromRole="Categories" ToRole="CategorySpecs" />
+          <NavigationProperty Name="SubCategories" Relationship="Self.FK__SubCatego__Categ__267ABA7A" FromRole="Categories" ToRole="SubCategories" />
+        </EntityType>
+        <EntityType Name="CategorySpecs">
+          <Key>
+            <PropertyRef Name="CategorySpecsId" />
+          </Key>
+          <Property Name="CategorySpecsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="SpecId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__CategoryS__Categ__5070F446" FromRole="CategorySpecs" ToRole="Categories" />
+          <NavigationProperty Name="Specs" Relationship="Self.FK__CategoryS__SpecI__4F7CD00D" FromRole="CategorySpecs" ToRole="Specs" />
+          <NavigationProperty Name="Prod_CatSpec" Relationship="Self.FK__Prod_CatS__Categ__5441852A" FromRole="CategorySpecs" ToRole="Prod_CatSpec" />
+        </EntityType>
+        <EntityType Name="Prod_CatSpec">
+          <Key>
+            <PropertyRef Name="Prod_CatSpecId" />
+          </Key>
+          <Property Name="Prod_CatSpecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="CategorySpecsId" Type="Int32" Nullable="false" />
+          <Property Name="SpecValue" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CategorySpecs" Relationship="Self.FK__Prod_CatS__Categ__5441852A" FromRole="Prod_CatSpec" ToRole="CategorySpecs" />
+          <NavigationProperty Name="Products" Relationship="SmartStoreDBModel.FK__Prod_CatS__Produ__534D60F1" FromRole="Prod_CatSpec" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ProductSubCategories">
+          <Key>
+            <PropertyRef Name="ProductSubCategoryId" />
+          </Key>
+          <Property Name="ProductSubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SubCategories" Relationship="Self.FK__ProductSu__SubCa__29572725" FromRole="ProductSubCategories" ToRole="SubCategories" />
+          <NavigationProperty Name="Products" Relationship="SmartStoreDBModel.FK_ProductSubCategory_Product" FromRole="ProductSubCategories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Specs">
+          <Key>
+            <PropertyRef Name="SpecId" />
+          </Key>
+          <Property Name="SpecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CategorySpecs" Relationship="Self.FK__CategoryS__SpecI__4F7CD00D" FromRole="Specs" ToRole="CategorySpecs" />
+        </EntityType>
+        <EntityType Name="SubCategories">
+          <Key>
+            <PropertyRef Name="SubCategoryId" />
+          </Key>
+          <Property Name="SubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__SubCatego__Categ__267ABA7A" FromRole="SubCategories" ToRole="Categories" />
+          <NavigationProperty Name="ProductSubCategories" Relationship="Self.FK__ProductSu__SubCa__29572725" FromRole="SubCategories" ToRole="ProductSubCategories" />
+        </EntityType>
+        <Association Name="FK__BrandCate__Brand__30F848ED">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+          <End Role="BrandCategories" Type="Self.BrandCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="BrandId" />
+            </Principal>
+            <Dependent Role="BrandCategories">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BrandCate__Categ__31EC6D26">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="BrandCategories" Type="Self.BrandCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="BrandCategories">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryS__Categ__5070F446">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="CategorySpecs" Type="Self.CategorySpecs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CategorySpecs">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SubCatego__Categ__267ABA7A">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="SubCategories" Type="Self.SubCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="SubCategories">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryS__SpecI__4F7CD00D">
+          <End Role="Specs" Type="Self.Specs" Multiplicity="1" />
+          <End Role="CategorySpecs" Type="Self.CategorySpecs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specs">
+              <PropertyRef Name="SpecId" />
+            </Principal>
+            <Dependent Role="CategorySpecs">
+              <PropertyRef Name="SpecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prod_CatS__Categ__5441852A">
+          <End Role="CategorySpecs" Type="Self.CategorySpecs" Multiplicity="1" />
+          <End Role="Prod_CatSpec" Type="Self.Prod_CatSpec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorySpecs">
+              <PropertyRef Name="CategorySpecsId" />
+            </Principal>
+            <Dependent Role="Prod_CatSpec">
+              <PropertyRef Name="CategorySpecsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductSu__SubCa__29572725">
+          <End Role="SubCategories" Type="Self.SubCategories" Multiplicity="1" />
+          <End Role="ProductSubCategories" Type="Self.ProductSubCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategories">
+              <PropertyRef Name="SubCategoryId" />
+            </Principal>
+            <Dependent Role="ProductSubCategories">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmartStoreDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BrandCategories" EntityType="Self.BrandCategories" />
+          <EntitySet Name="Brands" EntityType="Self.Brands" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="CategorySpecs" EntityType="Self.CategorySpecs" />
+          <EntitySet Name="Prod_CatSpec" EntityType="Self.Prod_CatSpec" />
+          <EntitySet Name="ProductSubCategories" EntityType="Self.ProductSubCategories" />
+          <EntitySet Name="Specs" EntityType="Self.Specs" />
+          <EntitySet Name="SubCategories" EntityType="Self.SubCategories" />
+          <AssociationSet Name="FK__BrandCate__Brand__30F848ED" Association="Self.FK__BrandCate__Brand__30F848ED">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="BrandCategories" EntitySet="BrandCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BrandCate__Categ__31EC6D26" Association="Self.FK__BrandCate__Categ__31EC6D26">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="BrandCategories" EntitySet="BrandCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryS__Categ__5070F446" Association="Self.FK__CategoryS__Categ__5070F446">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CategorySpecs" EntitySet="CategorySpecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SubCatego__Categ__267ABA7A" Association="Self.FK__SubCatego__Categ__267ABA7A">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="SubCategories" EntitySet="SubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryS__SpecI__4F7CD00D" Association="Self.FK__CategoryS__SpecI__4F7CD00D">
+            <End Role="Specs" EntitySet="Specs" />
+            <End Role="CategorySpecs" EntitySet="CategorySpecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prod_CatS__Categ__5441852A" Association="Self.FK__Prod_CatS__Categ__5441852A">
+            <End Role="CategorySpecs" EntitySet="CategorySpecs" />
+            <End Role="Prod_CatSpec" EntitySet="Prod_CatSpec" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductSu__SubCa__29572725" Association="Self.FK__ProductSu__SubCa__29572725">
+            <End Role="SubCategories" EntitySet="SubCategories" />
+            <End Role="ProductSubCategories" EntitySet="ProductSubCategories" />
+          </AssociationSet>
+          <EntitySet Name="Products" EntityType="SmartStoreDBModel.Products" />
+          <AssociationSet Name="FK_Product_BrandCategory" Association="SmartStoreDBModel.FK_Product_BrandCategory">
+            <End Role="BrandCategories" EntitySet="BrandCategories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prod_CatS__Produ__534D60F1" Association="SmartStoreDBModel.FK__Prod_CatS__Produ__534D60F1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Prod_CatSpec" EntitySet="Prod_CatSpec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSubCategory_Product" Association="SmartStoreDBModel.FK_ProductSubCategory_Product">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductSubCategories" EntitySet="ProductSubCategories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="BrandCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BrandCategories" Relationship="SmartStoreDBModel.FK_Product_BrandCategory" FromRole="Products" ToRole="BrandCategories" />
+          <NavigationProperty Name="Prod_CatSpec" Relationship="SmartStoreDBModel.FK__Prod_CatS__Produ__534D60F1" FromRole="Products" ToRole="Prod_CatSpec" />
+          <NavigationProperty Name="ProductSubCategories" Relationship="SmartStoreDBModel.FK_ProductSubCategory_Product" FromRole="Products" ToRole="ProductSubCategories" />
+        </EntityType>
+        <Association Name="FK_Product_BrandCategory">
+          <End Type="SmartStoreDBModel.BrandCategories" Role="BrandCategories" Multiplicity="1" />
+          <End Type="SmartStoreDBModel.Products" Role="Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandCategories">
+              <PropertyRef Name="BrandCategoryId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BrandCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prod_CatS__Produ__534D60F1">
+          <End Type="SmartStoreDBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="SmartStoreDBModel.Prod_CatSpec" Role="Prod_CatSpec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Prod_CatSpec">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSubCategory_Product">
+          <End Type="SmartStoreDBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="SmartStoreDBModel.ProductSubCategories" Role="ProductSubCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ProductSubCategories">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SmartStoreDBModelStoreContainer" CdmEntityContainer="SmartStoreDBEntities">
+          <EntitySetMapping Name="BrandCategories">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.BrandCategories">
+              <MappingFragment StoreEntitySet="BrandCategories">
+                <ScalarProperty Name="BrandCategoryId" ColumnName="BrandCategoryId" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.Brands">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategorySpecs">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.CategorySpecs">
+              <MappingFragment StoreEntitySet="CategorySpecs">
+                <ScalarProperty Name="CategorySpecsId" ColumnName="CategorySpecsId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="SpecId" ColumnName="SpecId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prod_CatSpec">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.Prod_CatSpec">
+              <MappingFragment StoreEntitySet="Prod_CatSpec">
+                <ScalarProperty Name="Prod_CatSpecId" ColumnName="Prod_CatSpecId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CategorySpecsId" ColumnName="CategorySpecsId" />
+                <ScalarProperty Name="SpecValue" ColumnName="SpecValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSubCategories">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.ProductSubCategories">
+              <MappingFragment StoreEntitySet="ProductSubCategories">
+                <ScalarProperty Name="ProductSubCategoryId" ColumnName="ProductSubCategoryId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specs">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.Specs">
+              <MappingFragment StoreEntitySet="Specs">
+                <ScalarProperty Name="SpecId" ColumnName="SpecId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategories">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.SubCategories">
+              <MappingFragment StoreEntitySet="SubCategories">
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="SmartStoreDBModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="BrandCategoryId" ColumnName="BrandCategoryId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
