@@ -130,6 +130,13 @@ namespace StoreApp.Controllers
             var product = GetProductById(id);
             return View(product);
         }
+        // GET: Product/Delete/id
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            productHandler.Delete(id);
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public ActionResult Edit(ProductViewModel product)
         {

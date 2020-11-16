@@ -114,5 +114,10 @@ namespace StoreApp.BusinessLogic
                 DateCreated= productToUpdate.DateCreated
             });
         }
+        public void Delete(int productId)
+        {
+            specHandler.DeleteFromProdCatSpec(productId);
+            productRepo.Delete(productId);
+        }
     }
 }

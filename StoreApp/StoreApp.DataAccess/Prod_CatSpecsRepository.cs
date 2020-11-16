@@ -26,5 +26,13 @@ namespace StoreApp.DataAccess
         {
             return db.Prod_CatSpec.Where(x => x.ProductId == productId).ToList();
         }
+
+        public void DeleteMultiple(int productId)
+        {
+            var prod_CatSpecList = db.Prod_CatSpec
+                .Where(x => x.ProductId == productId);
+            db.Prod_CatSpec.RemoveRange(prod_CatSpecList);
+            db.SaveChanges();
+        }
     }
 }

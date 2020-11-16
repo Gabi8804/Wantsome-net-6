@@ -1,0 +1,23 @@
+﻿@model List<FirstMVC.Models.Student>
+@{
+    ViewBag.Title = "Students List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Students</h2>
+<p> Number of students: @Model.Count.</p>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.StudentId</td>
+            <td>@student.StudentName</td>
+            <td>@student.Age</td>
+        </tr>
+    }
+</table>

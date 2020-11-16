@@ -41,7 +41,7 @@
   values
   ('Laptop Asus ROG G15 G512LI',
   'Modelul ROG Strix G15 reprezinta emblema stilului elegant si subtil, oferind o experienta de utilizare formidabila pentru jocuri foarte serioase.',
-  5)
+  4.299,5)
 
   INSERT INTO [dbo].[Prod_CatSpec]
            ([ProductId]

@@ -124,5 +124,10 @@ namespace StoreApp.BusinessLogic
             return specModelList;
 
         }
+
+        public void DeleteFromProdCatSpec(int productId)
+        {
+            prod_catSpecsRepo.DeleteMultiple(productId);
+        }
     }
 }
