@@ -12,21 +12,22 @@ namespace StoreApp.DataAccess.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class Address
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categories()
+        public Address()
         {
-            this.BrandCategories = new HashSet<BrandCategories>();
-            this.CategorySpecs = new HashSet<CategorySpecs>();
+            this.Orders = new HashSet<Orders>();
         }
     
-        public int CategoryId { get; set; }
-        public string Name { get; set; }
+        public int AddressId { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string Postcode { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BrandCategories> BrandCategories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategorySpecs> CategorySpecs { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

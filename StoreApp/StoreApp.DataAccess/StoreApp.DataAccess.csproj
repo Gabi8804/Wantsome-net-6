@@ -50,11 +50,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressRepository.cs" />
     <Compile Include="BrandCategoryRepository.cs" />
     <Compile Include="BrandRepository.cs" />
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="CategorySpecRepository.cs" />
+    <Compile Include="Entities\Address.cs">
+      <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderRepository.cs" />
+    <Compile Include="Entities\Orders.cs">
+      <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\OrdersProducts.cs">
+      <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Products.cs">
+      <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Roles.cs">
+      <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Users.cs">
       <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="GenericRepository.cs" />
@@ -68,9 +85,6 @@
       <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\CategorySpecs.cs">
-      <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\ProductSubCategories.cs">
       <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Prod_CatSpec.cs">
@@ -94,14 +108,12 @@
     <Compile Include="Entities\Specs.cs">
       <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\SubCategories.cs">
-      <DependentUpon>SmartStoreDB_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="IDbRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Prod_CatSpecsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecsRepository.cs" />
+    <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace StoreApp.Controllers
 {
+    //[Authorize(Roles ="Admin"]
     public class ProductController : Controller
     {
         private readonly ProductHandler productHandler;
@@ -21,11 +22,13 @@ namespace StoreApp.Controllers
             brandHandler = new BrandHandler();
             categoryHandler = new CategoryHandler();
         }
+
         // GET: Product list
+        
         public ActionResult Index()
         {
             var productList = new List<ProductViewModel>();
-            var products = productHandler.GetProducts();
+            var products = productHandler.GetAllProducts();
 
             foreach (var product in products)
             {
@@ -42,6 +45,7 @@ namespace StoreApp.Controllers
         }
 
         // GET: Product/Create
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -58,6 +62,7 @@ namespace StoreApp.Controllers
 
 
         // POST: Product/Create
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Create(ProductViewModel product)
         {
@@ -124,6 +129,7 @@ namespace StoreApp.Controllers
 
 
         // GET: Product/Edit/id
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -152,12 +158,12 @@ namespace StoreApp.Controllers
                     CategoryId = product.Category.CategoryId,
                     Name = product.Category.Name
                 };
-                var BrandCategoryId = productHandler.GetBrandCategoryId(brandModel, categoryModel);
+                product.BrandCategoryId = productHandler.GetBrandCategoryId(brandModel, categoryModel);
 
-                productHandler.Update(new ProductModel
+                productHandler.Update(new ProductModel()
                 {
                     ProductId = product.ProductId,
-                    BrandCategoryId = BrandCategoryId,
+                    BrandCategoryId = product.BrandCategoryId,
                     Name = product.Name,
                     Description = product.Description,
                     Price = product.Price,

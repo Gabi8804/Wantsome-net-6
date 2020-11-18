@@ -30,9 +30,12 @@ namespace StoreApp.DataAccess.Entities
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<CategorySpecs> CategorySpecs { get; set; }
         public virtual DbSet<Prod_CatSpec> Prod_CatSpec { get; set; }
-        public virtual DbSet<ProductSubCategories> ProductSubCategories { get; set; }
         public virtual DbSet<Specs> Specs { get; set; }
-        public virtual DbSet<SubCategories> SubCategories { get; set; }
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OrdersProducts> OrdersProducts { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

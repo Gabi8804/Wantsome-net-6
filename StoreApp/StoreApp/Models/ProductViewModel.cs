@@ -22,7 +22,7 @@ namespace StoreApp.Models
         public int BrandCategoryId { get; set; }
         public DateTime DateCreated { get; set; }
         public string Image { get; set; }
-
+        public int Quantity { get; set; }
         public List<SpecificationsViewModel> Specifications { get; set; }
 
         public CategoryViewModel Category { get; set; }

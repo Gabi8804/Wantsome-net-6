@@ -12,13 +12,14 @@ namespace StoreApp.DataAccess.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductSubCategories
+    public partial class OrdersProducts
     {
-        public int ProductSubCategoryId { get; set; }
+        public int OrdersProductsId { get; set; }
+        public int OrderId { get; set; }
         public int ProductId { get; set; }
-        public int SubCategoryId { get; set; }
+        public int Quantity { get; set; }
     
-        public virtual SubCategories SubCategories { get; set; }
+        public virtual Orders Orders { get; set; }
         public virtual Products Products { get; set; }
     }
 }

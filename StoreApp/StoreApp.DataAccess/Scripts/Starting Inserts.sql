@@ -37,10 +37,10 @@
  */
 
   insert into Products
-  ([Name],[Description],Price,BrandCategoryId)
+  ([Name],[Description],Price,BrandCategoryId, Quantity)
   values
   ('Laptop Asus ROG G15 G512LI',
-  'Modelul ROG Strix G15 reprezinta emblema stilului elegant si subtil, oferind o experienta de utilizare formidabila pentru jocuri foarte serioase.',
+  'Modelul ROG Strix G15 reprezinta emblema stilului elegant si subtil, oferind o experienta de utilizare formidabila pentru jocuri foarte serioase.',10,
   4.299,5)
 
   INSERT INTO [dbo].[Prod_CatSpec]

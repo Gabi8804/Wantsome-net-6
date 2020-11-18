@@ -12,21 +12,18 @@ namespace StoreApp.DataAccess.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class Roles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categories()
+        public Roles()
         {
-            this.BrandCategories = new HashSet<BrandCategories>();
-            this.CategorySpecs = new HashSet<CategorySpecs>();
+            this.Users = new HashSet<Users>();
         }
     
-        public int CategoryId { get; set; }
+        public int RoleId { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BrandCategories> BrandCategories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategorySpecs> CategorySpecs { get; set; }
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

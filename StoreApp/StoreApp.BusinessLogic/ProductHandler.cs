@@ -29,24 +29,14 @@ namespace StoreApp.BusinessLogic
             brandHandler = new BrandHandler();
             specHandler = new SpecificationsHandler();
         }
-        public List<ProductModel> GetProducts()
+        public List<ProductModel> GetAllProducts()
         {
             var productList = productRepo.ReadAll();
             var prodListBL = new List<ProductModel>();
 
             foreach (var prod in productList)
             {
-                var name = prod.Name;
-                prodListBL.Add(new ProductModel()
-                {
-                    Name = prod.Name,
-                    Price = prod.Price,
-                    Description = prod.Description,
-                    BrandCategoryId = prod.BrandCategoryId,
-                    ProductId = prod.ProductId,
-                    Image = prod.Image,
-                    DateCreated = (DateTime)prod.DateCreated
-                });
+                prodListBL.Add(new ProductModel(prod));
             }
             return prodListBL;
         }
@@ -58,15 +48,8 @@ namespace StoreApp.BusinessLogic
             var brandModel = brandHandler.GetById(brandAndCategory.BrandId);
             var categoryModel = categoryHandler.GetById(brandAndCategory.CategoryId);
             var specModelList = specHandler.GetSpecificationsByProductId(productId);
-            var prodModel = new ProductModel
+            var prodModel = new ProductModel(product)
             {
-                Name = product.Name,
-                Price = product.Price,
-                Description = product.Description,
-                BrandCategoryId = product.BrandCategoryId,
-                ProductId = product.ProductId,
-                Image = product.Image,
-                DateCreated = (DateTime)product.DateCreated,
                 Brand = brandModel,
                 Category = categoryModel,
                 Specifications=specModelList

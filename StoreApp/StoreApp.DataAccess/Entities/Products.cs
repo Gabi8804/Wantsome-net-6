@@ -11,15 +11,14 @@ namespace StoreApp.DataAccess.Entities
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
             this.Prod_CatSpec = new HashSet<Prod_CatSpec>();
-            this.ProductSubCategories = new HashSet<ProductSubCategories>();
+            this.OrdersProducts = new HashSet<OrdersProducts>();
         }
     
         public int ProductId { get; set; }
@@ -28,13 +27,13 @@ namespace StoreApp.DataAccess.Entities
         public double Price { get; set; }
         public int BrandCategoryId { get; set; }
         public string Image { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public virtual System.DateTime? DateCreated { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
+        public int Quantity { get; set; }
     
         public virtual BrandCategories BrandCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prod_CatSpec> Prod_CatSpec { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductSubCategories> ProductSubCategories { get; set; }
+        public virtual ICollection<OrdersProducts> OrdersProducts { get; set; }
     }
 }

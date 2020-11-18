@@ -6,8 +6,10 @@ using System.Web.Mvc;
 
 namespace StoreApp.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View();
